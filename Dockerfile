@@ -1,4 +1,4 @@
-FROM opensuse:leap
+FROM localhost:5000/opensuse:leap
 MAINTAINER Ingo Müller <ingo.mueller@inf.ethz.ch>
 ENV container docker
 
@@ -19,6 +19,7 @@ RUN zypper -n ref && \
 RUN zypper -n ref && \
     zypper -n up --skip-interactive --no-recommends && \
     zypper -n install -l --no-recommends \
+        vim \
         gcc \
         libcap-devel \
         python-devel \
@@ -39,6 +40,8 @@ RUN zypper -n ref && \
 COPY assets/start.sh /opt/start-hxe.sh
 COPY assets/angelize.py /opt/angelize.py
 COPY assets/install.sh /opt/install.sh
+COPY assets/stop.sh /opt/stop.sh
+COPY assets/info.sh /opt/info.sh
 
 EXPOSE 4390 8090 39013 39015 39018 59013 59014
 
